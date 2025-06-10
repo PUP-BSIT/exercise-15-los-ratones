@@ -1,4 +1,4 @@
-PAUSE_MESSAGE = "Press Enter to continue..."
+PAUSE_MESSAGE = "Press Enter to Continue..."
 
 while True:
     print(
