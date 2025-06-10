@@ -1,3 +1,6 @@
+from losratones.manicio import Manicio
+
+PAUSE_MESSAGE = "Press Enter to continue..."
 from losratones import reduta
 
 PAUSE_MESSAGE = "Press Enter to Continue..."
@@ -32,8 +35,8 @@ while True:
             pass
             input(PAUSE_MESSAGE)
         case 3:
-            #TODO(Manicio, Dion Kylo): Implement your class here.
-            pass
+            manicio = Manicio()
+            manicio.menu()
             input(PAUSE_MESSAGE)
         case 4:
             reduta.BankingSystem().menu()
