@@ -1,8 +1,8 @@
 from losratones import campos
-
 from losratones.manicio import Manicio
+from losratones.reduta import BankingSystem
 
-PAUSE_MESSAGE = "Press Enter to continue..."
+PAUSE_MESSAGE = "Press Enter to Continue..."
 
 while True:
     print(
@@ -37,8 +37,7 @@ while True:
             manicio.menu()
             input(PAUSE_MESSAGE)
         case 4:
-            #TODO(Reduta, Paul Benidict): Implement your class here.
-            pass
+            BankingSystem().menu()
             input(PAUSE_MESSAGE)
         case 5:
             #TODO(Rodriguez, John Paul): Implement your class here.
