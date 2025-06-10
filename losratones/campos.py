@@ -62,13 +62,17 @@ class DescribeMe:
             f"{self.dream}? Sounds like a fantasy!"
         ])
         print(f"\n---\n{response}\n---\n")
-    
-    def exit_program(self):
-        print("Exiting program. Goodbye!")
-        exit()
+
+    def menu(self):
+        while True:
+            self.display_menu()
+            choice = input("Enter your choice: ")
+            should_continue = self.handle_choice(choice)
+            if not should_continue:
+                break
 
     def display_menu(self):
-        input("\nPress Enter to continue...")
+        input("Press Enter to continue...")
         print("\n--- Welcome to DescribeBot ---\n")
         print("1. Say something about your name")
         print("2. Say something about your age")
@@ -77,26 +81,21 @@ class DescribeMe:
         print("5. Say something about your dream")
         print("6. Exit")
 
-    def handle_choice(self, choice):
+    def handle_choice(self, user_choice):
         options = {
             "1": self.describe_name,
             "2": self.describe_age,
             "3": self.describe_hometown,
             "4": self.describe_movie,
             "5": self.describe_dream,
-            "6": self.exit_program
         }
-        if choice in options:
-            options[choice]()
+        
+        if user_choice in options:
+            options[user_choice]()
+            return True
+        elif user_choice == "6":
+            print("\nThank you for using DescribeBot! Goodbye!")
+            return False
         else:
             print("\nInvalid choice. Please try again.")
-
-    def menu(self):
-        while True:
-            self.display_menu()
-            choice = input("Enter your choice: ")
-            self.handle_choice(choice)
-
-if __name__ == "__main__":
-    user = DescribeMe()
-    user.menu()
+            return True
