@@ -1,8 +1,11 @@
 import random
 
+EXIT_OPTION = "6"
+PAUSE_MESSAGE = "Press Enter to Continue..."
+
 class DescribeMe:
     def __init__(self):
-        print("Please enter the following details first:\n")
+        print("\nPlease enter the following details first:\n")
         self.name = input("Enter your name: ")
         while True:
             try:
@@ -79,7 +82,7 @@ class DescribeMe:
                 break
 
     def display_menu(self):
-        input("Press Enter to continue...")
+        input(PAUSE_MESSAGE)
         print("\n--- Welcome to DescribeBot ---\n")
         print("1. Say something about your name")
         print("2. Say something about your age")
@@ -100,7 +103,7 @@ class DescribeMe:
         if user_choice in options:
             options[user_choice]()
             return True
-        elif user_choice == "6":
+        elif user_choice == EXIT_OPTION:
             print("\nThank you for using DescribeBot! Goodbye!")
             return False
         else:
