@@ -7,6 +7,8 @@ MENU_ITEMS = {
 }
 
 LINE_SEPARATOR = "-" * 30
+MIN_QUANTITY = 1
+EXIT_OPTION = "0"
 
 class Manicio:
     def __init__(self):
@@ -35,7 +37,7 @@ class Manicio:
         while True:
             item = input("\nEnter item to add (or 0 to stop): ").title()
 
-            if item == "0":
+            if item == EXIT_OPTION:
                 print("Finished adding items to cart.")
                 break
 
@@ -45,13 +47,14 @@ class Manicio:
 
             try:
                 quantity = int(input(f"Enter quantity for {item}: "))
-                if quantity <= 0:
-                    print("Quantity must be greater than zero.")
-                    continue
             except ValueError:
                 print("Invalid quantity. Please enter a number.")
                 continue
-
+            
+            if quantity <= MIN_QUANTITY:
+                    print("Quantity must be greater than zero.")
+                    continue
+            
             if item in self.cart:
                 self.cart[item] += quantity
             else:
@@ -87,9 +90,6 @@ class Manicio:
             print("Please set customer name before checkout.")
             self.set_customer_name()
 
-            if not self.customer_name: 
-                return
-
         print("\n===== RECEIPT =====")
         print(f"Customer: {self.customer_name}")
         print(LINE_SEPARATOR)
@@ -99,7 +99,7 @@ class Manicio:
         for item, quantity in self.cart.items():
             price = self.menu_items[item]
             subtotal = price * quantity
-            print(f"{item} x {quantity} @ PHP {price} = PHP {subtotal}")
+            print(f"{item} x {quantity} @ PHP {price} = PHP {subtotal}")       
             total += subtotal
 
         print(LINE_SEPARATOR)
@@ -121,7 +121,7 @@ class Manicio:
 
             choice = input("Select an option: ")
 
-            if choice == "0":
+            if choice == EXIT_OPTION:
                 break
 
             match choice:
