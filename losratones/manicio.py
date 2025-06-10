@@ -17,6 +17,7 @@ class Manicio:
         self.menu_items = MENU_ITEMS
 
     def set_customer_name(self):
+        """Prompt and validate customer name input."""
         while True:
             name = input("Enter customer name: ").strip()
             if not name:
@@ -27,11 +28,13 @@ class Manicio:
             break
 
     def view_menu(self):
+        """Display available menu items with prices."""
         print("\nAvailable Menu:")
         for item, price in self.menu_items.items():
             print(f"{item} - PHP {price}")
 
     def add_to_cart(self):
+        """Add selected items and quantities to cart."""
         self.view_menu()
 
         while True:
@@ -63,6 +66,7 @@ class Manicio:
             print(f"Added {quantity} x {item} to cart.")
 
     def view_cart(self):
+        """Display current cart contents and total."""
         if not self.cart:
             print("Cart is empty.")
             return
@@ -82,6 +86,7 @@ class Manicio:
         print(f"Total: PHP {total}")
 
     def checkout(self):
+        """Process order and generate receipt."""
         if not self.cart:
             print("Your cart is empty. Cannot proceed to checkout.")
             return
