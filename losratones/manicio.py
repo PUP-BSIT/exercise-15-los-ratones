@@ -54,7 +54,7 @@ class Manicio:
                 print("Invalid quantity. Please enter a number.")
                 continue
             
-            if quantity <= MIN_QUANTITY:
+            if quantity < MIN_QUANTITY:
                     print("Quantity must be greater than zero.")
                     continue
             
