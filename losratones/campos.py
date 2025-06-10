@@ -4,7 +4,14 @@ class DescribeMe:
     def __init__(self):
         print("Please enter the following details first:\n")
         self.name = input("Enter your name: ")
-        self.age = int(input("Enter your age: "))
+        while True:
+            try:
+                self.age = int(input("Enter your age: "))
+                if self.age < 0:
+                    raise ValueError("Age must be non-negative.")
+                break
+            except ValueError as e:
+                print(f"Invalid input: {e}. Please enter a number")
         self.hometown = input("Enter your hometown: ")
         self.movie = input("Enter your favorite movie: ")
         self.dream = input("Enter your dream: ")
