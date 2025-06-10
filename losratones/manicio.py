@@ -109,31 +109,40 @@ class Manicio:
 
         self.cart.clear()
 
+    def display_menu(self):
+        """Display the order management options."""
+        print("\n[Order Management]")
+        print("1. Set Customer Name")
+        print("2. View Menu")
+        print("3. Add to Cart")
+        print("4. View Cart") 
+        print("5. Checkout")
+        print("0. Back to Main Menu")
+
+    def handle_menu_choice(self, choice):
+        """Process the user's menu selection."""
+        match choice:
+            case "1":
+                self.set_customer_name()
+            case "2":
+                self.view_menu()
+            case "3":
+                self.add_to_cart()
+            case "4":
+                self.view_cart()
+            case "5":
+                self.checkout()
+            case _:
+                print("Invalid option. Try again.")
+
     def menu(self):
+        """Main menu loop."""
         while True:
-            print("\n[Food Menu]")
-            print("1. Set Customer Name")
-            print("2. View Menu")
-            print("3. Add to Cart")
-            print("4. View Cart")
-            print("5. Checkout")
-            print("0. Back to Main Menu")
-
+            self.display_menu()
             choice = input("Select an option: ")
-
+            
             if choice == EXIT_OPTION:
                 break
+                
+            self.handle_menu_choice(choice)
 
-            match choice:
-                case "1":
-                    self.set_customer_name()
-                case "2":
-                    self.view_menu()
-                case "3":
-                    self.add_to_cart()
-                case "4":
-                    self.view_cart()
-                case "5":
-                    self.checkout()
-                case _:
-                    print("Invalid option. Try again.")

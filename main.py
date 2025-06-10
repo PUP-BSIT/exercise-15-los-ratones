@@ -1,3 +1,5 @@
+from losratones.manicio import Manicio
+
 PAUSE_MESSAGE = "Press Enter to continue..."
 
 while True:
@@ -25,8 +27,8 @@ while True:
             pass
             input(PAUSE_MESSAGE)
         case 3:
-            #TODO(Manicio, Dion Kylo): Implement your class here.
-            pass
+            manicio = Manicio()
+            manicio.menu()
             input(PAUSE_MESSAGE)
         case 4:
             #TODO(Reduta, Paul Benidict): Implement your class here.
