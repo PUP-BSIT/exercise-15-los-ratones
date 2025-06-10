@@ -1,3 +1,5 @@
+from losratones import campos
+
 from losratones.manicio import Manicio
 from losratones.reduta import BankingSystem
 
@@ -25,8 +27,7 @@ while True:
 
     match user_choice:
         case 1: 
-            #TODO(Campos, Kenji Enishi): Implement your class here.
-            pass
+            campos.DescribeMe().menu()
             input(PAUSE_MESSAGE)
         case 2:
             #TODO(Gonot, Jedi Duncan): Implement your class here.
