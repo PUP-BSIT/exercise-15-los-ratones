@@ -1,5 +1,4 @@
 from losratones import campos
-
 from losratones.manicio import Manicio
 from losratones.reduta import BankingSystem
 
