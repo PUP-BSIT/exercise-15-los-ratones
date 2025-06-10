@@ -1,5 +1,6 @@
 import random
 
+EXIT_OPTION = "7"
 MIN_RANGE = 100000
 MAX_RANGE = 999999
 PAUSE_MESSAGE = "Press Enter to Continue..."
@@ -14,6 +15,8 @@ class BankingSystem:
 
         self.owner = owner
         self.balance = balance
+        self.logged_in = False
+        self.active_account = None
 
     def create_account(self):
         owner_name = input("Enter your name: ")
@@ -28,24 +31,10 @@ class BankingSystem:
 
         input(PAUSE_MESSAGE)
 
-    def user_login(self):
-        account_number = input("Enter your account number: ")
-
-        if account_number in bank_accounts:
-            account = bank_accounts[account_number]
-            self.owner = account.owner
-            self.account_number = account.account_number
-            self.balance = account.balance
-            print(f"Welcome! {self.owner}")    
-        else:
-            print("Account not found.")
-            return False
-
-        return True
-
     def deposit_cash(self):
-        if not self.user_login():
-            return 
+        account = self.get_authenticated_account()
+        if not account:
+            return
 
         deposit_amount = input("Enter amount to deposit: ")
 
@@ -56,20 +45,21 @@ class BankingSystem:
             return
 
         if deposit_amount > 0:
-            self.balance += deposit_amount
-            bank_accounts[self.account_number].balance = self.balance
+            account.balance += deposit_amount
+            bank_accounts[account.account_number].balance = account.balance
             print(
                 f"Deposited {deposit_amount}, "
-                f"New balance: {self.balance}"
-                )
+                f"New balance: {account.balance}"
+            )
         else:
             print("Deposit amount must be positive.")
 
         input(PAUSE_MESSAGE)
 
     def withdraw_cash(self):
-        if not self.user_login():
-            return 
+        account = self.get_authenticated_account()
+        if not account:
+            return
 
         withdraw_amount = input("Enter amount to withdraw: ")
 
@@ -79,71 +69,76 @@ class BankingSystem:
             print("Invalid amount. Please enter a number.")
             return
 
-        if 0 < withdraw_amount <= self.balance:
-            self.balance -= withdraw_amount
-            bank_accounts[self.account_number].balance = self.balance 
-            print(f"Withdrew {withdraw_amount}. New balance: {self.balance}")
+        if 0 < withdraw_amount <= account.balance:
+            account.balance -= withdraw_amount
+            bank_accounts[account.account_number].balance = account.balance
+            print(
+                f"Withdrew {withdraw_amount}."
+                f"New balance: {account.balance}"
+                )
         else:
             print("Insufficient funds or invalid amount.")
 
         input(PAUSE_MESSAGE)
 
     def check_balance(self):
-        if not self.user_login():
-            return 
+        account = self.get_authenticated_account()
+        if not account:
+            return
 
-        print(f"Account balance: {self.balance}")
+        print(f"Account balance: {account.balance}")
         input(PAUSE_MESSAGE)
 
     def transfer_cash(self):
-        if not self.user_login():
-            return 
-    
+        source_account = self.get_authenticated_account()
+        if not source_account:
+            return
+        
         target_account_number = input("Enter target account number: ")
-    
+        
         if target_account_number not in bank_accounts:
             print("Target account not found.")
             return
-    
+        
         transfer_amount = input("Enter amount to transfer: ")
-    
+        
         try:
             transfer_amount = float(transfer_amount)
         except ValueError: 
             print("Invalid amount. Please enter a valid amount.")
             return
+        
+        if 0 < transfer_amount <= source_account.balance:
+            source_account.balance -= transfer_amount
     
-        if 0 < transfer_amount <= self.balance:
-            self.balance -= transfer_amount
-            bank_accounts[self.account_number].balance = self.balance
-
             target = bank_accounts[target_account_number]
             target.balance += transfer_amount
-            bank_accounts[target_account_number].balance = target.balance
-        
-            print(
+    
+            summary = (
                 f"Transferred {transfer_amount} "
                 f"to {target.owner}."
             )
+            print(summary)
         else:
             print("Transfer failed. Check amount and balance.")
-        
+
         input(PAUSE_MESSAGE)
 
     def account_summary(self):
-        if not self.user_login():
-            return 
+        account = self.get_authenticated_account()
+        if not account:
+            return
 
-        print(
-            f"Account {self.account_number} "
-            f"owned by {self.owner} "
-            f"with balance {self.balance}"
+        summary = (
+            f"Account {account.account_number} "
+            f"owned by {account.owner} "
+            f"with balance {account.balance}"
         )
-
+        print(summary)
+        
         input(PAUSE_MESSAGE)
 
     def menu(self):
-        #Loop until the users chooses to exit.
         while True:
             self.display_menu()
             user_choice = input("Select an option(1 - 7): ")
@@ -173,9 +168,31 @@ class BankingSystem:
         if user_choice in options:
             options[user_choice]()
             return True
-        elif user_choice == "7":
+        elif user_choice == EXIT_OPTION:
+            self.logout() 
             print("Thank you for using Banko Reduta!")
             return False
         else:
             print("Invalid choice. Please choose between 1 to 7.")
             return True
+
+    def get_authenticated_account(self):
+        if self.logged_in and self.active_account:
+            return self.active_account
+
+        account_number = input("Enter your account number: ")
+
+        if account_number in bank_accounts:
+            account = bank_accounts[account_number] 
+            print(f"Welcome! {account.owner}")
+            
+            self.logged_in = True
+            self.active_account = account
+            return account
+        
+        print("Account not found.")
+        return None
+
+    def logout(self):
+        self.logged_in = False 
+        self.active_account = None
