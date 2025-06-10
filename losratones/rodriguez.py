@@ -7,6 +7,7 @@ MOVIE_LISTINGS = {
 }
 
 LINE_SEPARATOR = "-" * 40
+EXIT_OPTION = "0"  # Added constant for exit option
 
 class MovieTicketManager:
     """A class to manage movie ticket bookings and reservations."""
@@ -56,9 +57,9 @@ class MovieTicketManager:
         self.view_movies()
 
         while True:
-            movie = input("\nEnter movie name to book (or 0 to finish): ").strip()
+            movie = input(f"\nEnter movie name to book (or {EXIT_OPTION} to finish): ").strip()
             
-            if movie == "0":
+            if movie == EXIT_OPTION:
                 print("Finished booking tickets.")
                 break
                 
@@ -110,7 +111,6 @@ class MovieTicketManager:
             return
             
         if not self._customer_name:
-            print("Please set your name before confirming your booking.")
             self.set_customer_name()
             
             if not self._customer_name:
@@ -150,11 +150,11 @@ class MovieTicketManager:
             print("3. Book Movie Tickets")
             print("4. View My Bookings")
             print("5. Generate Booking Confirmation")
-            print("0. Back to Main Menu")
+            print(f"{EXIT_OPTION}. Back to Main Menu")
             
             choice = input("Select an option: ")
             
-            if choice == "0":
+            if choice == EXIT_OPTION:
                 break
                 
             match choice:
