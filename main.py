@@ -1,3 +1,5 @@
+from losratones import reduta
+
 PAUSE_MESSAGE = "Press Enter to Continue..."
 
 while True:
@@ -34,8 +36,7 @@ while True:
             pass
             input(PAUSE_MESSAGE)
         case 4:
-            #TODO(Reduta, Paul Benidict): Implement your class here.
-            pass
+            reduta.BankingSystem().menu()
             input(PAUSE_MESSAGE)
         case 5:
             #TODO(Rodriguez, John Paul): Implement your class here.
