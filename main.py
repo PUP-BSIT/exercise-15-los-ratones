@@ -1,6 +1,7 @@
 from losratones import campos
 from losratones.manicio import Manicio
 from losratones.reduta import BankingSystem
+from losratones.rodriguez import MovieTicketManager
 
 PAUSE_MESSAGE = "Press Enter to Continue..."
 
@@ -35,8 +36,7 @@ while True:
             BankingSystem().menu()
             input(PAUSE_MESSAGE)
         case 4:
-            #TODO(Rodriguez, John Paul): Implement your class here.
-            pass
+            MovieTicketManager().menu()
             input(PAUSE_MESSAGE)
         case 5:
             print("Exiting the program. Goodbye!")
