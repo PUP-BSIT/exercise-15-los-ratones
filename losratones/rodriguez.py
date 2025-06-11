@@ -54,7 +54,8 @@ class MovieTicketManager:
         self.view_movies()
 
         while True:
-            movie = input(f"\nEnter movie name to book (or {EXIT_OPTION} to finish): ").strip()
+            prompt = f"\nEnter movie name to book (or {EXIT_OPTION} to finish): "
+            movie = input(prompt).strip()
             
             if movie == EXIT_OPTION:
                 print("Finished booking tickets.")
