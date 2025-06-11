@@ -147,7 +147,8 @@ class MovieTicketManager:
         for movie, tickets in self.bookings.items():
             price = self.available_movies[movie]
             subtotal = price * tickets
-            print(f"{movie}: {tickets} ticket(s) @ PHP {price:.2f} = PHP {subtotal:.2f}")
+            print(f"{movie}: {tickets} ticket(s) @ PHP {price:.2f} = "
+                  f"PHP {subtotal:.2f}")
             total_cost += subtotal
             
         print(LINE_SEPARATOR)
@@ -176,7 +177,8 @@ class MovieTicketManager:
         if self.customer_name:
             print(f"Customer: {self.customer_name}")
         if self.bookings:
-            print(f"Current Bookings: {self.booking_count()} movies, {self.total_tickets()} tickets")
+            print(f"Current Bookings: {self.booking_count()} movies, "
+                  f"{self.total_tickets()} tickets")
             
         print("1. Set Customer Name")
         print("2. View Available Movies")
