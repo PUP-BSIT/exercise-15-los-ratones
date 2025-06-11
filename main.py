@@ -1,4 +1,4 @@
-from losratones import campos
+from losratones.campos import DescribeMe
 from losratones.manicio import Manicio
 from losratones.reduta import BankingSystem
 from losratones.rodriguez import MovieTicketManager
@@ -28,11 +28,10 @@ while True:
 
     match user_choice:
         case 1: 
-            campos.DescribeMe().menu()
+            DescribeMe().menu()
             input(PAUSE_MESSAGE)
         case 2:
-            manicio = Manicio()
-            manicio.menu()
+            Manicio().menu() 
             input(PAUSE_MESSAGE)
         case 3:
             BankingSystem().menu()
