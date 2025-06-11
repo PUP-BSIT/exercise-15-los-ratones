@@ -18,17 +18,14 @@ class MovieTicketManager:
         self._bookings = {}
         self._available_movies = MOVIE_LISTINGS
     
-    @property
     def customer_name(self):
         """Get the customer's name."""
         return self._customer_name
     
-    @property
     def booking_count(self):
         """Get the total number of movies booked."""
         return len(self._bookings)
     
-    @property
     def total_tickets(self):
         """Get the total number of tickets across all bookings."""
         return sum(self._bookings.values())
