@@ -10,15 +10,17 @@ while True:
         "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-",
         "Welcome to Los Ratones Classes!",
         "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-",
-        "1. Campos, Kenji Enish",
+        "1. Campos, Kenji Enishi",
         "2. Manicio, Dion Kylo",
         "3. Reduta, Paul Benidict",
         "4. Rodriguez, John Paul",
         "5. Exit", sep="\n"
         )
     
+    user_choice = input("Please choose an option (1 - 5): ")
+    
     try:
-        user_choice = int(input("Enter your choice (1 - 5): "))
+        user_choice = int(user_choice)
     except ValueError:
         print("Invalid input. Please choose between 1 to 5.")
         input(PAUSE_MESSAGE)
